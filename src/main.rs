@@ -2,9 +2,7 @@
 #![allow(clippy::unused_io_amount)]
 #![allow(dead_code)]
 
-pub mod byte_packet_buffer;
-pub mod query_type;
-pub mod result_code;
+pub mod primitives;
 pub mod dns;
 pub mod server;
 

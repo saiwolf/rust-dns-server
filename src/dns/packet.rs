@@ -1,5 +1,4 @@
-use crate::byte_packet_buffer::BytePacketBuffer;
-use crate::query_type::QueryType;
+use super::super::primitives::{BytePacketBuffer, QueryType};
 
 use super::header::DnsHeader;
 use super::question::DnsQuestion;

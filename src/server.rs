@@ -1,10 +1,7 @@
 use std::net::UdpSocket;
 
-use super::byte_packet_buffer::BytePacketBuffer;
-use super::dns::packet::DnsPacket;
-use super::dns::question::DnsQuestion;
-use super::query_type::QueryType;
-use super::result_code::ResultCode;
+use super::dns::{DnsPacket, DnsQuestion};
+use super::primitives::{BytePacketBuffer, QueryType, ResultCode};
 
 type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;

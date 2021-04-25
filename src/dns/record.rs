@@ -1,6 +1,6 @@
 use std::net::{Ipv4Addr, Ipv6Addr};
-use crate::byte_packet_buffer::BytePacketBuffer;
-use crate::query_type::QueryType;
+
+use super::super::primitives::{BytePacketBuffer, QueryType};
 
 type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;
