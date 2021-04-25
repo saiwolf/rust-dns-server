@@ -19,8 +19,8 @@ type Result<T> = std::result::Result<T, Error>;
 
 fn main() -> Result<()> {
     // Perform an A query for google.com
-    let qname = "google.com";
-    let qtype = QueryType::A;
+    let qname = "yahoo.com";
+    let qtype = QueryType::MX;
 
     // Using google's public DNS
     let server = ("8.8.8.8", 53);
