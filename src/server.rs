@@ -1,7 +1,7 @@
 use std::net::{Ipv4Addr, UdpSocket};
 
 use super::dns::{DnsPacket, DnsQuestion};
-use super::primitives::{BytePacketBuffer, QueryType, ResultCode};
+use super::dns::primitives::{BytePacketBuffer, QueryType, ResultCode};
 
 type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;

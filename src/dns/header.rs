@@ -1,4 +1,4 @@
-use super::super::primitives::{BytePacketBuffer, ResultCode};
+use super::primitives::{BytePacketBuffer, ResultCode};
 
 type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;

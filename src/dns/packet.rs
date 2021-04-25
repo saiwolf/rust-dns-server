@@ -1,6 +1,6 @@
 use std::net::{Ipv4Addr};
 
-use super::super::primitives::{BytePacketBuffer, QueryType};
+use super::primitives::{BytePacketBuffer, QueryType};
 use super::{DnsHeader, DnsQuestion, DnsRecord};
 
 type Error = Box<dyn std::error::Error>;

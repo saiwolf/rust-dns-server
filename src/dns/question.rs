@@ -1,7 +1,7 @@
 type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;
 
-use super::super::primitives::{BytePacketBuffer, QueryType};
+use super::primitives::{BytePacketBuffer, QueryType};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct DnsQuestion {
