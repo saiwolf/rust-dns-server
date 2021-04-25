@@ -28,7 +28,7 @@ impl BytePacketBuffer {
     }
 
     /// Current position within buffer
-    fn pos(&self) -> usize {
+    pub fn pos(&self) -> usize {
         self.pos
     }
 
@@ -47,7 +47,7 @@ impl BytePacketBuffer {
     }
 
     /// Read a single byte and move the position one step forward
-    pub fn read(&mut self) -> Result<u8> {
+    fn read(&mut self) -> Result<u8> {
         if self.pos >= 512 {
             return Err("End of buffer".into());
         }
@@ -88,6 +88,37 @@ impl BytePacketBuffer {
             | (self.read()? as u32);
 
         Ok(res)
+    }
+
+    fn write(&mut self, val: u8) -> Result<()> {
+        if self.pos >= 512 {
+            return Err("End of buffer".into());
+        }
+        self.buf[self.pos] = val;
+        self.pos += 1;
+        Ok(())
+    }
+
+    pub fn write_u8(&mut self, val: u8) -> Result<()> {
+        self.write(val)?;
+
+        Ok(())
+    }
+
+    pub fn write_u16(&mut self, val: u16) -> Result<()> {
+        self.write((val >> 8) as u8)?;
+        self.write((val & 0xFF) as u8)?;
+
+        Ok(())
+    }
+
+    pub fn write_u32(&mut self, val: u32) -> Result<()> {
+        self.write(((val >> 24) & 0xFF) as u8)?;
+        self.write(((val >> 16) & 0xFF) as u8)?;
+        self.write(((val >> 8) & 0xFF) as u8)?;
+        self.write((val & 0xFF) as u8)?;
+
+        Ok(())
     }
 
     /// Read a qname
@@ -175,6 +206,24 @@ impl BytePacketBuffer {
         if !jumped {
             self.seek(pos)?;
         }
+
+        Ok(())
+    }
+
+    pub fn write_qname(&mut self, qname: &str) -> Result<()> {
+        for label in qname.split('.') {
+            let len = label.len();
+            if len > 0x3f {
+                return Err("Single label exceeds 63 characters of length".into());
+            }
+
+            self.write_u8(len as u8)?;
+            for b in label.as_bytes() {
+                self.write_u8(*b)?;
+            }
+        }
+
+        self.write_u8(0)?;
 
         Ok(())
     }
